@@ -1,10 +1,11 @@
 import express, { Request, Response } from "express";
+import dotenv from "dotenv"; 
 import { Pool} from "pg";
 
 const app = express();
 const port = 5000;
 
-
+dotenv.config();
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL!, // non-null assertion
@@ -15,7 +16,26 @@ const pool = new Pool({
 });
 
 
+const initDB=async()=>{
+    await pool.query(`
+        CREATE TABLE IF NOT EXISTS users(
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(100) NOT NULL,
+        email VARCHAR(150) UNIQUE NOT NULL,
+        age INT,
+        phone VARCHAR (15), 
+        address TEXT,
+        create_at TIMESTAMP DEFAULT NOW (),
+        update_at TIMESTAMP DEFAULT NOW ()
 
+        
+        )
+        
+        
+        `)
+}
+
+initDB()
 //parser============> middle ware
 
 app.use(express.json());
@@ -35,3 +55,5 @@ app.post("/", (req: Request, res: Response) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
+
+
