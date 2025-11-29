@@ -1,18 +1,17 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv"; 
 import { Pool} from "pg";
+import path from "path";
 
+
+dotenv.config({path:path.join(process.cwd(),".env")});
 const app = express();
 const port = 5000;
 
-dotenv.config();
+
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL!, // non-null assertion
-  // যদি certificate সমস্যা আসে, নিম্নলিখিত ssl object use করতে পারো:
-  // ssl: {
-  //   rejectUnauthorized: false
-  // }
+  connectionString: `${process.env.DATABASE_URL}`
 });
 
 
@@ -29,6 +28,20 @@ const initDB=async()=>{
         update_at TIMESTAMP DEFAULT NOW ()
 
         
+        )
+        
+        
+        `);
+    await pool.query(`
+        CREATE TABLE IF NOT EXISTS todos(
+        id SERIAL PRIMARY KEY,
+        users_id INT REFERENCES users(id) ON DELETE CASCADE,
+        title VARCHAR(200) NOT NULL,
+        description TEXT,
+        completed BOOLEAN DEFAULT false,
+        due_date DATE,
+        create_at TIMESTAMP DEFAULT NOW (),
+        update_at TIMESTAMP DEFAULT NOW ()
         )
         
         
