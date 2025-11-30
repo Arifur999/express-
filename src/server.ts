@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import dotenv from "dotenv"; 
 import { Pool} from "pg";
 import path from "path";
@@ -50,11 +50,14 @@ const initDB=async()=>{
 
 initDB()
 //parser============> middle ware
+const logger=(req:Request,res:Response,next:NextFunction)=>{
+    next();
+}
 
 app.use(express.json());
 app.use(express.urlencoded());
 
-app.get("/", (req: Request, res: Response) => {
+app.get("/", logger,(req: Request, res: Response) => {
   res.send("Hello World!");
 });
 
