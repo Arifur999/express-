@@ -375,6 +375,19 @@ if (result.rowCount===0) {
 });
 
 
+// invalid routes error
+app.use((req,res)=>{
+res.status(404).json({
+    success:false,
+    message:"route not found",
+    path:req.path,
+
+
+})
+})
+
+
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
