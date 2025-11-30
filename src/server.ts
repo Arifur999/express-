@@ -179,6 +179,45 @@ if (result.rows.length===0) {
 
 });
 
+
+//Delete
+
+app.delete("/users/:id", async(req: Request, res: Response) => {
+ 
+
+try {
+
+
+    const result =await pool.query(`DELETE FROM users WHERE id=$1`,[req.params.id]);
+    // console.log(result.rows[0]);
+
+if (result.rowCount===0) {
+    res.status(404).json({
+        success:false,
+        message:'user not found'
+    })
+}else{
+    res.status(200).json({
+        success:true,
+        message:"user deleted successfully retrieved with dynamic id",
+        data:null
+    })
+}
+
+     res.status(200).json({
+        success:true,
+        message:"user data successfully retrieved",
+        data:result.rows
+    })
+} catch (err:any) {
+    res.status(500).json({
+        success:false,
+        message:err.message
+    })
+}
+
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
