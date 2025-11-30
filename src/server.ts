@@ -58,6 +58,7 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
 
+//users CRUD
 app.post("/users", async(req: Request, res: Response) => {
     const {name,email}=req.body;
 
@@ -78,11 +79,29 @@ try {
     })
 }
 
+});
 
-  res.status(201).json({
-    success: true,
-    message: "API Is Working",
-  });
+
+app.get("/users", async(req: Request, res: Response) => {
+ 
+
+try {
+
+
+    const result =await pool.query(`SELECT * FROM users`);
+    // console.log(result.rows[0]);
+     res.status(200).json({
+        success:true,
+        message:"user data successfully retrieved",
+        data:result.rows
+    })
+} catch (err:any) {
+    res.status(500).json({
+        success:false,
+        message:err.message
+    })
+}
+
 });
 
 app.listen(port, () => {
