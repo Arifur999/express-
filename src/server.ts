@@ -51,7 +51,7 @@ app.use("/users",userRoutes)
 
 
 //------------------get user----------------------------------------
-app.use("/users",userRoutes)
+// app.use("/users",userRoutes)
 
 //--------------------------------------------------//
 

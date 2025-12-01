@@ -7,26 +7,6 @@ router.post("/",userControllers.createUser)
 
 
 
-router.get("/",async(req: Request, res: Response) => {
- 
-
-try {
-
-
-    const result =await pool.query(`SELECT * FROM users`);
-    // console.log(result.rows[0]);
-     res.status(200).json({
-        success:true,
-        message:"user data successfully retrieved",
-        data:result.rows
-    })
-} catch (err:any) {
-    res.status(500).json({
-        success:false,
-        message:err.message
-    })
-}
-
-})
+router.get("/",userControllers.getUser)
 
 export const userRoutes=router;
