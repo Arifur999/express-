@@ -1,8 +1,10 @@
-import express, { NextFunction, Request, Response } from "express";
+import express, { Request, Response } from "express";
 
 
 import config from "./config";
 import initDB, { pool } from "./config/db";
+import logger from "./middleware/logger";
+import { userRoutes } from "./modules/user/user.routes";
 
 
 const app = express();
@@ -12,9 +14,7 @@ const port = config.port;
 
 initDB()
 //parser============> middle ware
-const logger=(req:Request,res:Response,next:NextFunction)=>{
-    next();
-}
+
 
 app.use(express.json());
 app.use(express.urlencoded());
@@ -24,52 +24,65 @@ app.get("/", logger,(req: Request, res: Response) => {
 });
 
 //users CRUD
-app.post("/users", async(req: Request, res: Response) => {
-    const {name,email}=req.body;
+// user ==> post  =====> clean code
+app.use("/users",userRoutes)
 
-try {
+// app.post("/users", async(req: Request, res: Response) => {
+//     const {name,email}=req.body;
 
-
-    const result =await pool.query(`INSERT INTO users(name,email) VALUES($1,$2) RETURNING *`,[name,email]);
-    // console.log(result.rows[0]);
-     res.status(201).json({
-        success:true,
-        message:"data successfully insert",
-        data:result.rows[0]
-    })
-} catch (err:any) {
-    res.status(500).json({
-        success:false,
-        message:err.message
-    })
-}
-
-});
+// try {
 
 
-app.get("/users", async(req: Request, res: Response) => {
+//     const result =await pool.query(`INSERT INTO users(name,email) VALUES($1,$2) RETURNING *`,[name,email]);
+//     // console.log(result.rows[0]);
+//      res.status(201).json({
+//         success:true,
+//         message:"data successfully insert",
+//         data:result.rows[0]
+//     })
+// } catch (err:any) {
+//     res.status(500).json({
+//         success:false,
+//         message:err.message
+//     })
+// }
+
+// });
+
+
+//------------------get user----------------------------------------
+app.use("/users",userRoutes)
+
+//--------------------------------------------------//
+
+// app.get("/users", async(req: Request, res: Response) => {
  
 
-try {
+// try {
 
 
-    const result =await pool.query(`SELECT * FROM users`);
-    // console.log(result.rows[0]);
-     res.status(200).json({
-        success:true,
-        message:"user data successfully retrieved",
-        data:result.rows
-    })
-} catch (err:any) {
-    res.status(500).json({
-        success:false,
-        message:err.message
-    })
-}
+//     const result =await pool.query(`SELECT * FROM users`);
+//     // console.log(result.rows[0]);
+//      res.status(200).json({
+//         success:true,
+//         message:"user data successfully retrieved",
+//         data:result.rows
+//     })
+// } catch (err:any) {
+//     res.status(500).json({
+//         success:false,
+//         message:err.message
+//     })
+// }
 
-});
+// });
 
 // single user
+
+
+
+//---------------------------------- id --------------
+
 app.get("/users/:id", async(req: Request, res: Response) => {
  
 
