@@ -5,3 +5,6 @@ const router =express.Router();
 
 router.post("/",todosController.createTodos);
 
+router.get("/",todosController.getTodos);
+
+router.get("/",todosController.singleTodos);

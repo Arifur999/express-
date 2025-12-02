@@ -122,63 +122,9 @@ app.use("/todos",userRoutes)
 // });
 
 
-app.get("/todos", async(req: Request, res: Response) => {
- 
+// app.get("/todos", );
 
-try {
-
-
-    const result =await pool.query(`SELECT * FROM todos`);
-    // console.log(result.rows[0]);
-     res.status(200).json({
-        success:true,
-        message:"todos data successfully retrieved",
-        data:result.rows
-    })
-} catch (err:any) {
-    res.status(500).json({
-        success:false,
-        message:err.message
-    })
-}
-
-});
-
-app.get("/todos/:id", async(req: Request, res: Response) => {
- 
-
-try {
-
-
-    const result =await pool.query(`SELECT * FROM todos WHERE id=$1`,[req.params.id]);
-    // console.log(result.rows[0]);
-
-if (result.rows.length===0) {
-    res.status(404).json({
-        success:false,
-        message:'user not found'
-    })
-}else{
-    res.status(200).json({
-        success:true,
-        message:"todos data successfully retrieved with dynamic id",
-        data:result.rows[0]
-    })
-}
-
-     res.status(200).json({
-        success:true,
-        message:"todos data successfully retrieved",
-        data:result.rows
-    })
-} catch (err:any) {
-    res.status(500).json({
-        success:false,
-        message:err.message
-    })
-}
-
-});
+// app.get("/todos/:id", );
 
 
 app.put("/todos/:id", async(req: Request, res: Response) => {
