@@ -19,9 +19,9 @@ initDB()
 app.use(express.json());
 app.use(express.urlencoded());
 
-app.get("/", logger,(req: Request, res: Response) => {
-  res.send("Hello World!");
-});
+// app.get("/", logger,(req: Request, res: Response) => {
+//   res.send("Hello World!");
+// });
 
 //users CRUD
 // user ==> post  =====> clean code
@@ -92,7 +92,7 @@ app.use("/users",userRoutes)
 
 //Delete
 
-app.delete("/users/:id",);
+// app.delete("/users/:id",);
 
 //------------------todos crud-------
 
