@@ -96,27 +96,30 @@ app.use("/users",userRoutes)
 
 //------------------todos crud-------
 
-app.post("/todos", async(req: Request, res: Response) => {
-    const {user_id,title}=req.body;
 
-try {
+app.use("/todos",userRoutes)
+
+// app.post("/todos", async(req: Request, res: Response) => {
+//     const {user_id,title}=req.body;
+
+// try {
 
 
-    const result =await pool.query(`INSERT INTO todos(users_id,title) VALUES($1,$2) RETURNING *`,[user_id,title]);
-    // console.log(result.rows[0]);
-     res.status(201).json({
-        success:true,
-        message:"todos successfully insert",
-        data:result.rows[0]
-    })
-} catch (err:any) {
-    res.status(500).json({
-        success:false,
-        message:err.message
-    })
-}
+//     const result =await pool.query(`INSERT INTO todos(users_id,title) VALUES($1,$2) RETURNING *`,[user_id,title]);
+//     // console.log(result.rows[0]);
+//      res.status(201).json({
+//         success:true,
+//         message:"todos successfully insert",
+//         data:result.rows[0]
+//     })
+// } catch (err:any) {
+//     res.status(500).json({
+//         success:false,
+//         message:err.message
+//     })
+// }
 
-});
+// });
 
 
 app.get("/todos", async(req: Request, res: Response) => {

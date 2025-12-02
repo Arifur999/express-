@@ -22,3 +22,8 @@ try {
 }
 
 }
+
+export const todosController={
+createTodos,
+
+}
