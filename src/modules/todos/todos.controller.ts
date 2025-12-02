@@ -118,10 +118,50 @@ if (result.rows.length===0) {
 }
 
 }
+
+
+
+const deleteTodos=async(req: Request, res: Response) => {
+ 
+
+try {
+
+
+    const result =await todos.deleteTodos(req.params.id as string)
+    // console.log(result.rows[0]);
+
+if (result.rowCount===0) {
+    res.status(404).json({
+        success:false,
+        message:'todos not found'
+    })
+}else{
+    res.status(200).json({
+        success:true,
+        message:"todos deleted successfully retrieved with dynamic id",
+        data:null
+    })
+}
+
+     res.status(200).json({
+        success:true,
+        message:"todos data successfully retrieved",
+        data:result.rows
+    })
+} catch (err:any) {
+    res.status(500).json({
+        success:false,
+        message:err.message
+    })
+}
+
+}
+
 export const todosController={
 createTodos,
 getTodos,
 singleTodos,
 updateTodos,
+deleteTodos
 
 }

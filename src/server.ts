@@ -127,43 +127,9 @@ app.use("/todos",userRoutes)
 // app.get("/todos/:id", );
 
 
-app.put("/todos/:id", );
+// app.put("/todos/:id", );
 
-app.delete("/todos/:id", async(req: Request, res: Response) => {
- 
-
-try {
-
-
-    const result =await pool.query(`DELETE FROM todos WHERE id=$1`,[req.params.id]);
-    // console.log(result.rows[0]);
-
-if (result.rowCount===0) {
-    res.status(404).json({
-        success:false,
-        message:'todos not found'
-    })
-}else{
-    res.status(200).json({
-        success:true,
-        message:"todos deleted successfully retrieved with dynamic id",
-        data:null
-    })
-}
-
-     res.status(200).json({
-        success:true,
-        message:"todos data successfully retrieved",
-        data:result.rows
-    })
-} catch (err:any) {
-    res.status(500).json({
-        success:false,
-        message:err.message
-    })
-}
-
-});
+app.delete("/todos/:id", );
 
 
 // invalid routes error

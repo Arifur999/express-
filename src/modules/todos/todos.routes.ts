@@ -11,3 +11,6 @@ router.get("/",todosController.singleTodos);
 
 router.put("/:id",todosController.updateTodos);
 
+router.delete("/:id",todosController.deleteTodos);
+
+
