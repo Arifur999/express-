@@ -15,9 +15,15 @@ const singleTodos=async(id:string)=>{
     return result;
 }
 
+const updateTodos=async(name:string,email:string,id:string)=>{
+    const result=await pool.query(`UPDATE todos SET name=$1, email=2 WHERE id=$3 RETURNING *`,[name,email,id]);
+    return result;
+}
+
 export const todos={
     createTodos,
     getTodos,
     singleTodos,
+    updateTodos,
 
 }

@@ -81,9 +81,47 @@ if (result.rows.length===0) {
 }
 
 }
+
+
+const updateTodos=async(req: Request, res: Response) => {
+ 
+const {name,email}=req.body;
+try {
+
+
+    const result =await todos.updateTodos(name,email,req.params.id as string)
+    // console.log(result.rows[0]);  
+
+if (result.rows.length===0) {
+    res.status(404).json({
+        success:false,
+        message:'todos not found'
+    })
+}else{
+    res.status(200).json({
+        success:true,
+        message:"todos data successfully updated with dynamic id",
+        data:result.rows[0]
+    })
+}
+
+     res.status(200).json({
+        success:true,
+        message:"todos data successfully retrieved",
+        data:result.rows
+    })
+} catch (err:any) {
+    res.status(500).json({
+        success:false,
+        message:err.message
+    })
+}
+
+}
 export const todosController={
 createTodos,
 getTodos,
 singleTodos,
+updateTodos,
 
 }

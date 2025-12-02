@@ -127,41 +127,7 @@ app.use("/todos",userRoutes)
 // app.get("/todos/:id", );
 
 
-app.put("/todos/:id", async(req: Request, res: Response) => {
- 
-const {name,email}=req.body;
-try {
-
-
-    const result =await pool.query(`UPDATE todos SET name=$1, email=2 WHERE id=$3 RETURNING *`,[name,email,req.params.id]);
-    // console.log(result.rows[0]);  
-
-if (result.rows.length===0) {
-    res.status(404).json({
-        success:false,
-        message:'todos not found'
-    })
-}else{
-    res.status(200).json({
-        success:true,
-        message:"todos data successfully updated with dynamic id",
-        data:result.rows[0]
-    })
-}
-
-     res.status(200).json({
-        success:true,
-        message:"todos data successfully retrieved",
-        data:result.rows
-    })
-} catch (err:any) {
-    res.status(500).json({
-        success:false,
-        message:err.message
-    })
-}
-
-});
+app.put("/todos/:id", );
 
 app.delete("/todos/:id", async(req: Request, res: Response) => {
  

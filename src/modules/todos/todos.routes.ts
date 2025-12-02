@@ -8,3 +8,6 @@ router.post("/",todosController.createTodos);
 router.get("/",todosController.getTodos);
 
 router.get("/",todosController.singleTodos);
+
+router.put("/:id",todosController.updateTodos);
+
