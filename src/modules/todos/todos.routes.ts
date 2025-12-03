@@ -14,3 +14,4 @@ router.put("/:id",todosController.updateTodos);
 router.delete("/:id",todosController.deleteTodos);
 
 
+export const todosRoutes=router

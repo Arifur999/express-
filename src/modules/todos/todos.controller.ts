@@ -2,12 +2,13 @@ import { Request, Response } from "express";
 import { todos } from "./todos.service";
 
 const createTodos=async(req: Request, res: Response) => {
-    const {user_id,title}=req.body;
+    
 
 try {
 
 
-    const result =await todos.createTodos(user_id,title)
+    const result =await todos.createTodos(req.body)
+  
     // console.log(result.rows[0]);
      res.status(201).json({
         success:true,

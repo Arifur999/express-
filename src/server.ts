@@ -5,6 +5,7 @@ import config from "./config";
 import initDB, { pool } from "./config/db";
 import logger from "./middleware/logger";
 import { userRoutes } from "./modules/user/user.routes";
+import { todosRoutes } from "./modules/todos/todos.routes";
 
 
 const app = express();
@@ -97,7 +98,7 @@ app.use("/users",userRoutes)
 //------------------todos crud-------
 
 
-app.use("/todos",userRoutes)
+app.use("/todos",todosRoutes)
 
 // app.post("/todos", async(req: Request, res: Response) => {
 //     const {user_id,title}=req.body;
@@ -129,7 +130,7 @@ app.use("/todos",userRoutes)
 
 // app.put("/todos/:id", );
 
-app.delete("/todos/:id", );
+// app.delete("/todos/:id", );
 
 
 // invalid routes error
