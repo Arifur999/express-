@@ -6,6 +6,7 @@ import initDB, { pool } from "./config/db";
 import logger from "./middleware/logger";
 import { userRoutes } from "./modules/user/user.routes";
 import { todosRoutes } from "./modules/todos/todos.routes";
+import { authRouters } from "./modules/auth/auth.routes";
 
 
 const app = express();
@@ -133,7 +134,16 @@ app.use("/todos",todosRoutes)
 // app.delete("/todos/:id", );
 
 
+
+
+
+
 // invalid routes error
+
+//-------------------------------------//
+
+app.use("/auth",authRouters)
+
 app.use((req,res)=>{
 res.status(404).json({
     success:false,
