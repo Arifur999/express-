@@ -8,7 +8,7 @@ router.post("/",userControllers.createUser)
 
 
 
-router.get("/",logger,auth(), userControllers.getUser)
+router.get("/",logger,auth("admin"), userControllers.getUser)
 
 //single id
 router.get("/:id",userControllers.getSingleUser)
